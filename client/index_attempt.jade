@@ -1,0 +1,137 @@
+doctype html
+html
+  head
+    meta(charset="utf-8")
+    title archeolofi
+
+    //-------------------------- external resources --------------------------
+    mixin js_import(link)
+      script(type="text/javascript", src=link)
+    mixin css_link(link)
+      link(rel="stylesheet", type="text/css", href=link)
+
+    // jQuery
+    +js_import("libs/jquery-1.11.1.min.js")
+
+    // jQuery Mobile
+    +css_link("libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.css")
+    +js_import("libs/jquery.mobile-1.4.2/jquery.mobile-1.4.2.min.js")
+
+    // Leaflet
+    +css_link("libs/leaflet-0.7.3/leaflet.css")
+    +js_import("libs/leaflet-0.7.3/leaflet.js")
+
+    // ours
+    +css_link("css/style.css")
+    +css_link("css/buttons.css")
+    +js_import("js/functions.js")
+    +js_import("js/admin_functions.js")
+    +js_import("js/location.js")
+
+    //------------------------------ buttons ---------------------------------
+    script.
+      $(document).ready( function() {
+          $("#login_button").click( function() {
+              data = read_form("login");
+              if(!data)
+                  return;
+              login(data[0], data[1]);
+          });
+      });
+
+      $(document).ready( function() {
+          $("#register_button").click( function() {
+              data = read_form("register");
+              if(!data)
+                  return;
+              register(data[0], data[1], data[2]);
+          });
+      });
+
+      $(function() {
+          $('#upload').click(function() {
+              $("#result_comment").show();
+
+              console.log($('#content_form'));
+              var comment = $('#content_form #comment').val();
+              if($('#content_form #file').val()) {
+                  var form_data = new FormData($('#content_form')[0]);
+                  upload(comment, form_data);
+              }
+              else
+                  post_a_comment(comment);
+          });
+      });
+
+      // menu buttons
+      $(document).ready( function() {
+          $(".menu_button").click( function() {
+              $(".logout_popup").hide();
+          });
+      });
+
+      $(document).ready( function() {
+          $(".user_logged").click( function() {
+              $(".logout_popup").show();
+          });
+      });
+
+      $(document).ready( function() {
+          $(".close_logout").click( function() {
+              $(".logout_popup").hide();
+          });
+      });
+
+      $(document).ready( function() {
+          $(".yes_logout").click( function() {
+              $(".logout_popup").hide();
+              logged_auth = null;
+              logged_name = null;
+              check_if_logged_in();
+          });
+      });
+
+    meta(
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    )
+
+  body
+    div#home(data-role="page")
+      div#mypanel(data-role="panel", data-display="overlay", data-position="right")
+        a(class="ui-corner-all", data-icon="delete", data-rel="close").
+          chiudi
+      //- ....
+
+      div(data-role="header")
+        a(href="#search", data-role="button", class="ui-btn-left", data-icon="search", data-inline="true").
+          cerca
+        h1 archeolofi
+        a.menu_button(href="#mypanel", data-role="button", class="ui-btn-right", data-icon="bars", data-inline="true").
+          Menù
+
+      div#content_map(data-role="content")
+        div#map.map
+
+      div#legenda(data-theme="a", data-role="footer", data-position="fixed")
+        figure
+          img(src="images/area_intervento.png")
+          figcaption area intervento
+        figure
+          img(src="images/X_grigia.png")
+          figcaption età preromana
+        figure
+          img(src="images/X_marrone.png")
+          img(src="images/linea_marrone.png")
+          figcaption età romana
+        figure
+          img(src="images/X_rossa.png")
+          img(src="images/linea_rossa.png")
+          figcaption età medievale
+        figure
+          img(src="images/X_grigioscuro.png")
+          img(src="images/linea_grigia.png")
+          figcaption età moderna
+        figure
+          img(src="images/X_oro.png")
+          figcaption indeterminabile
