@@ -28,7 +28,7 @@ html
     +js_import("js/admin_functions.js")
     +js_import("js/location.js")
 
-    //------------------------------ buttons ---------------------------------
+    //-------------------------------- buttons --------------------------------
     script.
       $(document).ready( function() {
           $("#login_button").click( function() {
@@ -97,7 +97,13 @@ html
     )
 
   body
-    div#home(data-role="page")
+    mixin page(page_id)
+      div(id=page_id, class="page", data-role="page")
+        block
+
+
+    //------------------------------ home: map! ------------------------------
+    +page("home")
       div#mypanel(data-role="panel", data-display="overlay", data-position="right")
         a(class="ui-corner-all", data-icon="delete", data-rel="close").
           chiudi
@@ -135,3 +141,119 @@ html
         figure
           img(src="images/X_oro.png")
           figcaption indeterminabile
+
+
+    //--------------------------------- info ---------------------------------
+    +page("info")
+      div(data-role="header")
+        h2 Maggiori informazioni
+        a(href="#home", class="ui-btn-left") Mappa
+
+      div(data-role="content")
+        div#test
+
+        div#info_sito(class="ui-body")
+          div#info_json_ritrovamento
+            h3#json_definizione
+              span#json_cronologia
+
+          div#info_json_intervento
+            span#json_approvazione
+            span#json_catasto_foglio
+            span#json_catasto_particella
+            span#json_comune
+            span#json_data_aggiornamento
+            span#json_motiv_intervento
+            span#json_nome_compilatore
+
+          div#basic_info
+          span#json_ubicazione
+
+          div#go_to_other_type
+
+          div#info_approfondite
+            div#description
+              h4 Descrizione approfondita:
+              span#descri
+            hr
+            div#bibliography
+              h4 Bibliografia:
+              span#biblio
+            hr
+            div#gallery
+              h4 Immagini:
+              span#image
+
+        div(data-role="collapsible-set")
+          div#layout_contents(data-role="collapsible", data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u")
+            h4 Contenuti utenti
+            div.contents
+            p#important è importante la tua opinione e esperienza: commenta!
+
+          div#collaps_add_cnt(data-role="collapsible")
+            h4 Aggiungi un contenuto
+
+            div#addcontent.user_logged
+              form#content_form(method="post", enctype="multipart/form-data")
+                div(data-role="fieldcontain")
+                  label(for="comment") Inserisci un tuo commento:
+                  textarea#comment(name="comment")
+                div(data-role="fieldcontain")
+                  fieldset
+                    label(for="file") Seleziona un file:
+                    input#file(name="file" type="file")
+                div(data-role="fieldcontain")
+                  button#upload(type="button", data-icon="comment", data-theme="d") Pubblica
+
+            div#login_required.user_unlogged fai login prima di aggiungere un contenuto:
+              a(href="#login", data-role="button", data-theme="e") accedi
+
+            h2#result_comment
+
+
+    //----------------------------- user contents -----------------------------
+    +page("user_contents")
+      div(data-role="header")
+        a(href="#", data-rel="back", class=["ui-btn", "ui-shadow", "ui-corner-all", "ui-icon-back", "ui-btn-icon-notext"])
+        h1 Contenuti degli utenti
+
+      div(data-role="content")
+        div.page_numbers
+        div.contents
+        div.page_numbers
+
+
+    //------------------------------- map popups ------------------------------
+    div#popup_ritrovamento(class="hidden")
+      h3.pop_elem
+        // definizione
+      p.pop_elem
+        // descrizione_min
+      span#periodo.pop_elem.ritr
+      span#tipologia_ritrov.pop_elem.ritr
+      a#passinfo(href="#info", class="ui-btn ui-icon-plus ui-btn-icon-left", data-icon="plus").
+        Altre informazioni
+
+    div#popup_intervento(class="hidden")
+      h3.pop_elem
+        // tipo_intervento
+      time#data_compilazione.pop_elem
+      ul.pop_elem
+        li metodo:
+          span#metodo.pop_elem.inte
+        li direzione scientifica:
+          span#dir_scie.pop_elem.inte
+        li ente responsabile:
+          span#ente_resp.pop_elem.inte
+        li ente schedatore:
+          span#ente_schedatore.pop_elem.inte
+        li esecutore_intervento:
+          span#esecutore_intervento.pop_elem.inte
+        li tipo particella:
+          span#tipo_particella.pop_elem.inte
+
+      a#passinfo(href="#info", class="ui-btn ui-icon-plus ui-btn-icon-left", data-icon="plus").
+        Altre informazioni
+
+
+    +js_import("js/map_functions.js")
