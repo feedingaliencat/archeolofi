@@ -141,7 +141,7 @@ html
         figure
           img(src="images/X_oro.png")
           figcaption indeterminabile
-
+          
 
     //--------------------------------- info ---------------------------------
     +page("info")
@@ -221,7 +221,57 @@ html
         div.page_numbers
         div.contents
         div.page_numbers
-
+        
+    //------------------------------login--------------------------------------
+    +page("login")
+        div(data-role="header")
+            a( href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext")
+            h2 Login
+            a( href="#register" data-role="button" class="ui-btn-right"  data-inline=”true”) registrati
+        div(data-role="content")
+            form#user_data_login( name="login")
+                div(  data-role="fieldcontain" class="ui-hide-label")
+                    label( for="username") Username:
+                    input#name_login( type="text" name="name_login" value="" placeholder="Username" required)
+                div.ui-hide-label( data-role="fieldcontain")
+                    label( for="password" ) Password:
+                    input#psw_login( type="password" name="psw_login" value="" placeholder="Password" required )
+                input#Login_button( type="button" data-icon="check" value="accedi" data-theme="d")
+                h2#login_situation
+            
+    //---------------------------------credits--------------------------------
+    +page("credits")
+        div(data-role="header")
+            a( href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext" )
+            h2 Credits
+        div(data-role="content")
+            p.  
+                Hanno sviluppato questa app archeologica
+                <b>Francesco Marchetti</b> e <b>Emilio Veloci</b>  
+            p.
+                Ideazione e supervisione di
+                <b>Andrea Ferracani</b> e <b>Daniele Pezzatini</b>
+            p.
+                Un progetto nato per il corso di Progettazione e produzione multimediale del professor <b>Alberto Del Bimbo</b>
+            figure
+                a( href="http://micc.unifi.it/")
+                img( src="images/micc_logo.gif" alt="logo del MICC" )
+                figcaption http://micc.unifi.it/
+            p.
+                Un ringraziamento speciale a <b>Emiliano Scampoli</b>, archeologo che ha curato, assieme a <b>Carlo Francini</b> del Comune di Firenze, la pubblicazione dei dati e la realizzazione del sito #[a( href="archeologia.comune.fi.it")archeologia.comune.fi.it] e che ci ha dato accesso ai dati aggiornati dei loro server.
+            dl
+                dt Contatti:
+                dd emilioveloci@gmail.com
+                dd francesco.marchetti@stud.unifi.it
+                dd scampoli.e@gmail.com
+            p.
+                I dati archeologici sono scaricabili dal #[a( href="http://datigis.comune.fi.it/MapStore/") geocatalogo OpenDat ] del Comune di Firenze, cercando la parola chiave 'archeologia'.
+            p.
+                Icone "like" e "dislike" da #[a(href="http://dryicons.com") http://dryicons.com]
+            p.
+                Il codice è liberamente scaricabile da #[a( href="https://github.com/archeolofi/archeolofi")
+                Non esitate a segnalare bug o problemi aprendo nuove <i>issue</i> su GitHub.
+                E, chiaramente, amiamo le pull request ;)
 
     //------------------------------- map popups ------------------------------
     div#popup_ritrovamento(class="hidden")
