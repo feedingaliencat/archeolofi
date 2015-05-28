@@ -239,6 +239,26 @@ html
                 input#Login_button( type="button" data-icon="check" value="accedi" data-theme="d")
                 h2#login_situation
             
+    //---------------------------------register-------------------------------
+    +page("register")
+        div(data-role="header")
+            a( href="#" data-rel="back" class="ui-btn ui-shadow ui-corner-all ui-icon-back ui-btn-icon-notext")
+            h2 Registrazione
+        div(data-role="content")
+            form#user_data_register( name="register")
+                div.ui-hide-label(  data-role="fieldcontain" )
+                    label( for="username") Username:
+                    input#name_register( type="text" name="name_register" value="" placeholder="Username" required)
+                div.ui-hide-label( data-role="fieldcontain")
+                    label( for="password" ) Password:
+                    input#psw_register( type="password" name="psw_register" value="" placeholder="Password" required )
+                div.ui-hide-label( data-role="fieldcontain")
+                    label( for="email") email:
+                    input#email( type="text" name="email" value="" placeholder="Email" required )
+                input#register_button( type="button" data-icon="edit" value="registrati" data-theme="d")
+                h2#register_error
+    
+    
     //---------------------------------credits--------------------------------
     +page("credits")
         div(data-role="header")
